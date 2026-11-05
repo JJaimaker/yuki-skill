@@ -1,0 +1,5 @@
+interface:
+  display_name: "工程机械蓝色汇报网页"
+  short_description: "为传统领导生成结论先行、数据清晰的工程机械蓝色汇报网页"
+  brand_color: "#003A70"
+  default_prompt: "使用 $engineering-machinery-blue-report-html 制作一个可部署到 Netlify 的工程机械领导汇报网页。"

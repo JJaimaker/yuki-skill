@@ -1,0 +1,5 @@
+name: html-yuki-regular-work-style
+title: html-yuki-regular-work-style
+description: "html-yuki-regular-work-style设计系统 — Modern Minimalism 基底，单色相 + 暖底色 + 字重对比 + 极致留白，研报印刷品质感。This skill should be used when generating static HTML pages, research reports, interactive web pages, or any HTML deliverable that needs a refined, professional visual style. Triggers on requests like '生成网页', '生成 HTML', '做个页面', '用 Sany WorkStyle 风格', '用研报红风格', '部署到 Netlify'. Also triggers when the user asks to create any HTML page without specifying a different design system."
+category: Web
+include_in_prompt: true

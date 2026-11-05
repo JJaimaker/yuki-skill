@@ -1,0 +1,5 @@
+name: new-skill
+title: 新 Skill
+description: 一句话写清这个 skill 什么时候用。
+category: Work and knowledge
+include_in_prompt: true

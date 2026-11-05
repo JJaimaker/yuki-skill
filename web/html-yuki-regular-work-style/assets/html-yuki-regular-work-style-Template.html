@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sany WorkStyle HTML Template</title>
+<style>
+/* ============================================================
+   Sany WorkStyle HTML Design System — Template
+   Theme: 研报红 (default)
+   To switch theme, change the CSS custom properties below.
+   ============================================================ */
+
+:root {
+  /* --- Theme: 研报红 --- */
+  --bg-page:    #FAF7F2;
+  --bg-card:    #FFFFFF;
+  --bg-card-alt: #FCF8F5;
+  --bg-highlight: #FEF2F2;
+  --bg-zebra:   #FCF8F5;
+
+  --accent:     #B91C1C;
+  --accent-dark: #7F1D1D;
+  --accent-1:   #DC2626;
+  --accent-2:   #EF4444;
+  --accent-3:   #F87171;
+
+  --border:     #E8D9D2;
+  --border-light: #F1E5E0;
+
+  --text-body:  #1B1B1B;
+  --text-secondary: #2B1B1B;
+  --text-aux:   #6B4F4F;
+
+  --radius:     6px;
+  --max-width: 960px;
+
+  --font-stack: -apple-system, 'Inter', 'Noto Sans SC', 'PingFang SC', sans-serif;
+  --font-mono:  'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+/* --- Theme: Gemini 紫 (uncomment to switch) --- */
+/*
+:root {
+  --bg-page:    #131314;
+  --bg-card:    #1E1E20;
+  --bg-card-alt: #252528;
+  --bg-highlight: #2A1A3E;
+  --bg-zebra:   #1A1A1C;
+
+  --accent:     #BB86FC;
+  --accent-dark: #A142F4;
+  --accent-1:   #CECBF6;
+  --accent-2:   #AFA9EC;
+  --accent-3:   #8AB4F8;
+
+  --border:     #3C3489;
+  --border-light: #252528;
+
+  --text-body:  #AFA9EC;
+  --text-secondary: #CECBF6;
+  --text-aux:   #8580B0;
+
+  --radius:     12px;
+}
+*/
+
+/* ============================================================
+   Reset
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-stack);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-body);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- CJK text wrapping: prevent single-character orphans --- */
+.no-break { white-space: nowrap; }
+
+/* Modern CSS anti-orphan: prevents single chars/words on last line.
+   Chrome 117+, Safari 17+, Edge 117+. Firefox not yet — graceful fallback via JS. */
+p, li, td, th, blockquote { text-wrap: pretty; }
+
+/* Headings: balance lines for even visual weight */
+h1, h2, h3, h4 { text-wrap: balance; }
+
+/* Respect CJK character boundaries; don't insert hyphens */
+html[lang="zh-CN"] p, html[lang="zh-CN"] li, html[lang="zh-CN"] td {
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
+}
+
+/* ============================================================
+   Layout: Main + TOC sidebar
+   ============================================================ */
+.page {
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.toc-sidebar {
+  position: sticky;
+  top: 0;
+  width: 240px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 48px 0;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+}
+
+.toc-sidebar h4 {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-aux);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 16px;
+  padding: 0 16px;
+}
+
+.toc-item {
+  display: block;
+  padding: 6px 16px;
+  font-size: 13.5px;
+  color: var(--text-aux);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+}
+
+.toc-item:hover {
+  color: var(--accent);
+  background: var(--bg-highlight);
+}
+
+.toc-item.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 500;
+}
+
+.toc-item.toc-h3 {
+  padding-left: 32px;
+  font-size: 12.5px;
+}
+
+.main-content {
+  flex: 1;
+  max-width: var(--max-width);
+  padding: 64px 48px 96px 48px;
+}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+h1 {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-body);
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text-body);
+  margin-top: 64px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+h4 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+p {
+  margin-bottom: 14px;
+  color: var(--text-secondary);
+}
+
+strong {
+  font-weight: 500;
+  color: var(--accent-dark);
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+
+/* Card */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.card-accent {
+  border-left: 3px solid var(--accent);
+  background: var(--bg-highlight);
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+th {
+  background: var(--accent);
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 14px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+td {
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+tr:nth-child(even) td {
+  background: var(--bg-zebra);
+}
+
+tr:hover td {
+  background: var(--bg-highlight);
+}
+
+/* Pill tag */
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.tag-p0 { background: #B91C1C; }
+.tag-p1 { background: #DC2626; }
+.tag-p2 { background: #EF4444; }
+.tag-p3 { background: #F87171; }
+
+/* Blockquote */
+blockquote {
+  background: var(--bg-highlight);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+
+blockquote p {
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* Formula block */
+.formula {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 24px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  margin: 16px 0;
+}
+
+/* List */
+ol, ul {
+  padding-left: 20px;
+  margin-bottom: 14px;
+}
+
+li {
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+
+/* Divider */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* SVG container */
+.svg-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 20px 0;
+}
+
+.svg-caption {
+  font-size: 12px;
+  color: var(--text-aux);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Roadmap card */
+.roadmap-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+/* ============================================================
+   Footer & Signature
+   ============================================================ */
+.footer {
+  margin-top: 80px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-aux);
+  text-align: center;
+}
+
+.footer .signature {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 2px;
+}
+
+.footer .signature .sig-icon {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin: 0 8px 1px 0;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   Key conclusions block (first thing after header)
+   ============================================================ */
+.key-conclusions {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+
+.key-conclusions h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Tablet / narrow desktop: collapse TOC below main */
+@media (max-width: 960px) {
+  .toc-sidebar {
+    width: 200px;
+    font-size: 12px;
+  }
+  .toc-item { font-size: 12px; padding: 5px 12px; }
+  .toc-item.toc-h3 { font-size: 11px; padding-left: 24px; }
+}
+
+/* Tablet: stack layout, TOC becomes top bar */
+@media (max-width: 720px) {
+  .page {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+  .toc-sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+  .main-content {
+    padding: 32px 16px 64px 16px;
+  }
+  h1 { font-size: 26px; }
+  h2 { font-size: 20px; margin-top: 48px; }
+  h3 { font-size: 16px; margin-top: 24px; }
+  p  { font-size: 14.5px; line-height: 1.65; }
+  td, th { font-size: 12px; padding: 8px 10px; }
+  .card { padding: 20px 16px; }
+}
+
+/* Mobile: tight padding, one-column cards */
+@media (max-width: 480px) {
+  .page { padding: 0 12px; }
+  .main-content { padding: 24px 12px 48px 12px; }
+  h1 { font-size: 22px; }
+  h2 { font-size: 18px; margin-top: 40px; }
+  h3 { font-size: 15px; }
+  p  { font-size: 14px; line-height: 1.6; }
+  td, th { font-size: 11px; padding: 6px 8px; }
+  .card { padding: 16px 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- TOC Sidebar -->
+  <nav class="toc-sidebar">
+    <h4>目录</h4>
+    <a href="#sec-0" class="toc-item toc-h2 active">核心结论</a>
+    <a href="#sec-1" class="toc-item toc-h2">1. 第一大章</a>
+    <a href="#sec-1-1" class="toc-item toc-h3">1.1 小节</a>
+    <a href="#sec-2" class="toc-item toc-h2">2. 第二大章</a>
+    <a href="#sec-3" class="toc-item toc-h2">3. 第三大章</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Header -->
+    <div class="eyebrow">研究报告</div>
+    <h1>报告标题</h1>
+    <p style="color: var(--text-aux); font-size: 13px; margin-bottom: 32px;">副标题 / 日期</p>
+
+    <!-- Key Conclusions (first thing) -->
+    <section id="sec-0" class="key-conclusions">
+      <h3>核心结论</h3>
+      <ol>
+        <li>结论一</li>
+        <li>结论二</li>
+        <li>结论三</li>
+      </ol>
+    </section>
+
+    <!-- Section 1 -->
+    <section id="sec-1">
+      <h2>1. 第一大章</h2>
+      <p>正文内容。</p>
+
+      <h3 id="sec-1-1">1.1 小节</h3>
+      <p>小节内容。</p>
+
+      <div class="card">
+        <p>卡片内容。</p>
+      </div>
+
+      <div class="card card-accent">
+        <p><strong>强调卡片</strong>内容。</p>
+      </div>
+
+      <table>
+        <tr>
+          <th>列标题A</th>
+          <th>列标题B</th>
+          <th>列标题C</th>
+        </tr>
+        <tr>
+          <td><span class="tag tag-p0">P0</span></td>
+          <td>内容A</td>
+          <td>内容B</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-p1">P1</span></td>
+          <td>内容C</td>
+          <td>内容D</td>
+        </tr>
+      </table>
+
+      <blockquote>
+        <p>引用内容。</p>
+      </blockquote>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="sec-2">
+      <h2>2. 第二大章</h2>
+      <p>正文内容。</p>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="sec-3">
+      <h2>3. 第三大章</h2>
+      <p>正文内容。</p>
+    </section>
+
+    <!-- Footer & Signature -->
+    <div class="footer">
+      <p>用途：内部战略研究与评审</p>
+      <div class="signature">
+        <span class="sig-icon"></span>Yuki 观测站
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Scroll-spy for TOC -->
+<script>
+const sections = document.querySelectorAll('section[id]');
+const tocItems = document.querySelectorAll('.toc-item');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      tocItems.forEach(item => item.classList.remove('active'));
+      const activeItem = document.querySelector(`.toc-item[href="#${entry.target.id}"]`);
+      if (activeItem) activeItem.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+
+<!-- CJK orphan fix: prevent single-character last lines for browsers that don't support text-wrap:pretty -->
+<script>
+(function() {
+  var supportsPretty = CSS.supports('text-wrap', 'pretty');
+  if (supportsPretty) return;
+
+  function isCJK(c) {
+    var u = c.charCodeAt(0);
+    return (u >= 0x4E00 && u <= 0x9FFF) ||
+           (u >= 0x3400 && u <= 0x4DBF) ||
+           (u >= 0x3000 && u <= 0x303F) ||
+           (u >= 0xFF00 && u <= 0xFFEF) ||
+           (u >= 0x2E80 && u <= 0x2FDF);
+  }
+
+  function fixOrphans(el) {
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach(function(node) {
+      var text = node.nodeValue;
+      if (text.length < 3) return;
+      var cjkCount = 0;
+      for (var i = 0; i < Math.min(text.length, 20); i++) {
+        if (isCJK(text[i])) cjkCount++;
+      }
+      if (cjkCount < 4) return;
+
+      var newText = text.replace(/ (?=[^ ]{1,6}$)/, '\u00A0');
+      if (newText !== text) {
+        node.nodeValue = newText;
+      }
+    });
+  }
+
+  function fix() { fixOrphans(document.querySelector('.main-content')); }
+  fix();
+  window.addEventListener('resize', function() {
+    clearTimeout(window._orphanFixTimer);
+    window._orphanFixTimer = setTimeout(fix, 200);
+  });
+})();
+</script>
+
+</body>
+</html>

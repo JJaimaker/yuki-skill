@@ -1,0 +1,4 @@
+interface:
+  display_name: "战略规划PPT Skill"
+  short_description: "沿用董事长汇报的四模块推导、每页三层递进逻辑与蓝白视觉规范"
+  default_prompt: "请使用 $strategic-planning-ppt，将我的材料整理为每页三层逻辑递进的战略规划PPT。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SANY 伏总裁 PPT"
+  short_description: "将业务材料重构为伏总裁习惯的结论式、红蓝黑分层汇报页"
+  default_prompt: "Use $sany-fu-ppt to turn this material into a Fu-president-style SANY executive PPT page."
